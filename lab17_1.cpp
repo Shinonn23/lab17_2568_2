@@ -2,9 +2,11 @@
 #include<iomanip>
 using namespace std;
 
+
+
 int main(){
 	int nA,nB;
-	int *A,*B,*C;	
+	int *A,*B,**C;	
 	
 	cout << "Length of A: ";
 	cin >> nA;
@@ -20,12 +22,12 @@ int main(){
 	cout << "Input Array B: ";
 	for(int i=0; i < nB; i++) cin >> B[i];
 	
-	C = new int;
-	for(int i=0; i < nA; i++) C[i] = new int;
+	C = new int *[nA];
+	for(int i=0; i < nA; i++) C[i] = new int[nB];
 	
 	for(int i=0; i < nA; i++){
 		for(int j=0; j < nB; j++) {
-			C = A[i]*B[j];
+			C[i][j] = A[i]*B[j];
 		}
 	}
 	
@@ -43,7 +45,15 @@ int main(){
 		}
 		cout << "\n";
 	}
-     delete A,B,C; 
+    
+    
+    for (int i = 0; i < nA; i++) delete [] C[i];
+    // for (int i = 0; i < nA; i++) delete [] *A[i];
+    // for (int i = 0; i < nB; i++) delete [] *B[i];
+
+    delete [] C;
+    delete [] A;
+    delete [] B;
 
 	return 0;
 }
